@@ -1,0 +1,7 @@
+{
+    "mode": "default",
+    "db":{
+        "connectionString": "mongodb://localhost:27017/client-db",
+        "port": "1150"
+    }
+}
