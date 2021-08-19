@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpStatus, Param, Post, Res, Patch, Delete, Inj
 import { AppService } from './app.service';
 import { User } from './interfaces/user.interface';
 
-@Controller()
+@Controller('user')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
