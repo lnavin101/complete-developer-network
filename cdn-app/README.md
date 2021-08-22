@@ -8,6 +8,14 @@
   Website created using Angular 11 framework as GUI for User Management
 </p>
 
+### Quickstart
+````bash
+$ npm start
+
+# optional
+$ ng serve
+````
+
 ### Technologies Used
 
 ```
