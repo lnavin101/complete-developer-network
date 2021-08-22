@@ -11,22 +11,45 @@ class Phone{
     number: string;
 }
 
-export interface User extends Document {
-    //@IsNotEmpty()
+class UserClass {
+    @IsNotEmpty()
     username: string;
 
-    //@IsEmail()
-    //@IsNotEmpty()
+    @IsEmail()
+    @IsNotEmpty()
     email: string;
     
-    //@ValidateNested({ each: true })
-    //@Type(() => Phone)
-    phone: Object;
+    @ValidateNested({ each: true })
+    @Type(() => Phone)
+    phone: Phone;
 
-    //@IsString()
-    //@IsArray()
+    @IsString()
+    @IsArray()
     skills: string[];
 
-   // @IsString()
+    @IsString()
     hobby: string;
+}
+
+export interface User extends Document {
+//     //@IsNotEmpty()
+//     username: string;
+
+//     //@IsEmail()
+//     //@IsNotEmpty()
+//     email: string;
+    
+//     //@ValidateNested({ each: true })
+//     //@Type(() => Phone)
+//     phone: Object;
+
+//     //@IsString()
+//     //@IsArray()
+//     skills: string[];
+
+//    // @IsString()
+//     hobby: string;
+
+      (): User
+
 }

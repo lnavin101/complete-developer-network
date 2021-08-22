@@ -1,0 +1,9 @@
+
+<h2 mat-dialog-title>{{useDialog.title}}</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>{{useDialog.message}}</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close *ngIf="useDialog.isShowCancel == true">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial *ngIf="useDialog.isShowOK == true">OK</button>
+</mat-dialog-actions>

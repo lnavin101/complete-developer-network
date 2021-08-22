@@ -19,9 +19,9 @@ export class AppController {
     @Get('/:id')
     getUser(
         @Res() res,
-        @Param('id') orderId: string
+        @Param('id') userId: string
     ) {
-        this.appService.get(orderId).then((data)=>{
+        this.appService.get(userId).then((data)=>{
             return res.status(HttpStatus.OK).json(data);
         })
         .catch((error)=>{
@@ -32,9 +32,9 @@ export class AppController {
     @Post()
     createUser(
         @Res() res,
-        @Body() order: User
+        @Body() user: User
     ){
-        this.appService.create(order).then((data)=>{
+        this.appService.create(user).then((data)=>{
             return res.status(HttpStatus.OK).json(data);
         })
         .catch((error)=>{
@@ -45,10 +45,10 @@ export class AppController {
     @Patch('/:id')
     updateUser(
         @Res() res, 
-        @Param('id') orderId: string,
-        @Body() order: User
+        @Param('id') userId: string,
+        @Body() user: User
     ){
-        this.appService.update(orderId,order).then((data)=>{
+        this.appService.update(userId,user).then((data)=>{
             return res.status(HttpStatus.OK).json(data);
         })
         .catch((error)=>{
@@ -59,9 +59,9 @@ export class AppController {
     @Delete('/:id')
     deleteUser(
         @Res() res,
-        @Param('id') orderId: string
+        @Param('id') userId: string
     ) {
-        this.appService.delete(orderId).then((data)=>{
+        this.appService.delete(userId).then((data)=>{
             return res.status(HttpStatus.OK).json(data);
         })
         .catch((error)=>{
