@@ -78,14 +78,17 @@ div.center-page{
     margin-top: 30px;
 }
 
-.data-table {
+.data-table,
+div.new-line {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
   }
 
-.data-table table{
+.data-table table,
+div.new-line .full-width,
+.view-form form{
     width: 90%;
 }
 
@@ -95,10 +98,6 @@ div.center-page{
     justify-content: center;
     margin-top: 30px;
     margin-bottom: 20px;
-}
-
-.view-form form{
-    width: 90%;
 }
 
 .data-table > label,
@@ -148,4 +147,11 @@ td.center{
     display: block;
     align-items: center;
     justify-content: center;
+}
+
+
+.img-fluid{
+    margin-left: 100px;
+    max-height: 80%;
+    max-width: 70%;
 }

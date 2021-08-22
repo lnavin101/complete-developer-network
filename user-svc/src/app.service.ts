@@ -1,9 +1,10 @@
-import { Model } from 'mongoose';
+import { Model, Document } from 'mongoose';
 import { Inject,Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './interfaces/user.interface';
 
 @Injectable()
 export class AppService {
+
   constructor(@Inject('USER_MODEL') private userModel: Model<User>) {}
 
   async getList(): Promise<User[]> {

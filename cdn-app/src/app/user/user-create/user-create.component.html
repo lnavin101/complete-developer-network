@@ -1,1 +1,91 @@
-<p>user-create works!</p>
+<div class="section">
+    <div class="page-title">User</div>
+    <div class="title-line"></div>
+
+    <!--Create User-->
+    <div class="view-form">
+        <form [formGroup]="userForm">
+            <label>Create User</label>
+            <div class="form-box">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" style="display: unset;">
+                                <mat-label>Username</mat-label>
+                                <mat-icon matSuffix>person_outline</mat-icon>
+                                <input matInput [formControl]="userForm.controls['username']" required>
+                                <mat-error *ngIf="userForm.controls.username.invalid">Username is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" style="display: unset;">
+                                <mat-label>Email Address</mat-label>
+                                <mat-icon matSuffix>mail_outline</mat-icon>
+                                <input matInput [formControl]="userForm.controls['email']" required
+                                    type="email">
+                                <mat-error *ngIf="userForm.controls.email.invalid">Email is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" style="display: unset;">
+                                <mat-label>Phone Number</mat-label>
+                                <mat-icon matSuffix>contact_phone</mat-icon>
+                                <input matInput [formControl]="userForm.controls['phoneNumber']"
+                                    required type="number">
+                                <mat-error *ngIf="userForm.controls.phoneNumber.invalid">Phone number is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline" style="display: unset;">
+                                <mat-label>Hobby</mat-label>
+                                <mat-icon matSuffix>rowing</mat-icon>
+                                <input matInput [formControl]="userForm.controls['hobby']" required
+                                    type="text">
+                                <mat-error *ngIf="userForm.controls.hobby.invalid">Hobby is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table>
+                                <thead>
+                                    <th *ngIf="userForm.controls['skills'].value.length > 0">Skills</th>
+                                    <th *ngIf="userForm.controls['skills'].value.length > 0">Action</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let skill of userForm.controls['skills'].value; index as i;">
+                                        <td>
+                                            <mat-form-field appearance="outline" style="display: unset;">
+                                                <mat-icon matSuffix>grade</mat-icon>
+                                                <input matInput [formControl]="userForm.controls['skills'].value[i]" required type="text">
+                                                <mat-error *ngIf="userForm.controls['skills'].value[i].invalid">Skill is required</mat-error>
+                                            </mat-form-field>
+                                        </td>
+                                        <td class="center">
+                                            <button type="button" mat-icon-button color="warn" (click)="removeUserSkill(i)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pull-left">
+                                <button type="button" mat-raised-button color="primary" (click)="addNewUserSkill()">ADD SKILL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="pull-right">
+                <button type="submit" mat-raised-button color="primary" (click)="onSaveUser()" [disabled]="!userForm.valid || !skillsValid()">SAVE</button>
+                <button type="button" mat-raised-button color="primary" (click)="onCancelCreateUser()">CANCEL</button>
+            </div>
+        </form>
+    </div>
+</div>

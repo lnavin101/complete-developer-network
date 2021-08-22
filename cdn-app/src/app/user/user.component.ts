@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../core/services/user.service';
 import { User } from '../shared/models/user.model';
-import { FormBuilder, Validator, Validators, FormControl, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { Dialog } from '../shared/models/dialog.model';
@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 export class UserComponent implements OnInit {
 
   userList: User[] = [];
-  userSkills: FormArray = new FormArray([]);
   selectedUser = <User> {};
   headers: any = [
     {column: "username", name: "Username"},
@@ -32,7 +31,8 @@ export class UserComponent implements OnInit {
       Validators.email
     ])),
     phoneNumber: new FormControl("",Validators.required),
-    skills: new FormArray([new FormControl("",Validators.required)]),
+    skills: new FormArray([]),
+    skillsets: new FormControl(""),
     hobby: new FormControl("",Validators.required),
   })
   isEditMode: boolean = false;
@@ -49,18 +49,23 @@ export class UserComponent implements OnInit {
     })
   }
 
+  onCreateUser(){
+    this.router.navigate(['user','create']);
+  }
+
   onSelectUser(user: User){
     if(this.isEditMode == false){
       this.selectedUser = user;
-
-      const skillsArray = new FormArray([]);
-      for(let idx in user.skills){
-        skillsArray.push(new FormControl(user.skills[idx]))
-      };
-
-      this.userSkills = skillsArray;
+      this.updateUserSkills();
     }
-      
+  }
+
+  updateUserSkills(){
+    this.userForm.controls['skills'].reset();
+
+      for(let idx in this.selectedUser.skills){
+        this.userForm.controls['skills'].value.push(new FormControl(this.selectedUser.skills[idx],Validators.required));
+      };
   }
 
   onDeleteUser(){
@@ -76,7 +81,7 @@ export class UserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true){
+      if(result == true && this.selectedUser._id){
         this.userService.deleteUser(this.selectedUser._id).toPromise().then(()=>{
           this.refreshUserList();
         });
@@ -88,8 +93,37 @@ export class UserComponent implements OnInit {
     this.isEditMode = true;
   }
 
-  onSaveUser(){
+  onUpdateUser(){
+    const user: User={
+      _id: this.selectedUser._id,
+      username: this.userForm.controls['username'].value,
+      email: this.userForm.controls['email'].value,
+      phone: {
+        callingCode: '60',
+        number: this.userForm.controls['phoneNumber'].value,
+      },
+      skills: this.userForm.controls['skills'].value.map(function(control: FormControl){return control.value}),
+      hobby: this.userForm.controls['hobby'].value
+    }
+    this.userService.updateUser(user).subscribe((data)=>{
 
+      const dialogParams: Dialog ={
+        type: 'success'
+      }
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '500px',
+        height: '200px',
+        data: {
+          params: dialogParams
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if(result == true){
+          this.refreshUserList();
+        }
+      });
+    });
   }
 
   onCancelEdit(){
@@ -104,12 +138,11 @@ export class UserComponent implements OnInit {
   }
 
   addNewUserSkill() {
-    this.userSkills.push(new FormControl(''));
-    console.log(this.userForm.get('skills'));
+    this.userForm.controls['skills'].value.push(new FormControl("",Validators.required));
   }
 
   removeUserSkill(idx: number){
-    this.userSkills.removeAt(idx);
+    this.userForm.controls['skills'].value.splice(idx);
   }
 
 }

@@ -19,4 +19,12 @@ export class UserService {
   deleteUser(userId: string){
     return this.http.delete<any>(environment.apiUrl + '/' + userId);
   }
+
+  createUser(user: User){
+    return this.http.post<User>(environment.apiUrl, user);
+  }
+
+  updateUser(user: User){
+    return this.http.patch<User>(environment.apiUrl + '/' + user._id, user);
+  }
 }

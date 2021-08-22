@@ -1,5 +1,5 @@
 export interface User {
-    _id: string;
+    _id?: string;
     username: string;
     email: string;
     phone: {
@@ -10,6 +10,6 @@ export interface User {
     skills: string[],
     skillsets?: string;
     hobby: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
   }

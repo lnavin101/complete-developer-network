@@ -7,7 +7,6 @@ import { UserRoutes } from './user/user-routing.module';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  // { path: 'user', component: UserComponent },
   ...UserRoutes,
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
