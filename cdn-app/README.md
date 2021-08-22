@@ -22,7 +22,7 @@
  - Implemented module separation (Header, Footer, App Content)
  - Bootstrap Carousel in homepage as attention grabber
  - Mat Table as responsive data table for User List
- - Applied Angular Routing
+ - Applied Angular Routing with wildcard (page not found support)
  - Implemented Reactive Forms with input validation & Mat Dialog for better user experience
  - Implemented Shared Module to overcome having to import again separately in modules
  - Applied module and functionality separation as a best practise
@@ -36,6 +36,8 @@
 ```
  - Apply browser animations for better user experience
  - Better error handling & input validation
+ - Language Localization
+ - Implement user roles with authentication
  
 ```
 
