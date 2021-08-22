@@ -9,6 +9,14 @@
   Backend Service created using NestJS framework for listening to CRUD operations into NoSQL Database - MongoDB
 </p>
 
+### Quickstart
+````bash
+$ npm start
+
+# optional
+$ nest start
+````
+
 ### Technologies Used
 
 ```
